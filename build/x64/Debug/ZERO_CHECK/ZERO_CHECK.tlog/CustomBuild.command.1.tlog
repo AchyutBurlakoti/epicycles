@@ -1,0 +1,10 @@
+^C:\USERS\ACHYUT\DESKTOP\EPICYCLES\BUILD\CMAKEFILES\D61F69C27A6B1F1865A5CCC517A7B3B2\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/AchYuT/Desktop/epicycles -BC:/Users/AchYuT/Desktop/epicycles/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/AchYuT/Desktop/epicycles/build/epicycles.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

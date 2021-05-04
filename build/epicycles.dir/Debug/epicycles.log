@@ -1,0 +1,21 @@
+﻿  Building Custom Rule C:/Users/AchYuT/Desktop/epicycles/CMakeLists.txt
+  epicycles.cpp
+C:\Users\AchYuT\Desktop\epicycles\src\arrow.h(134,17): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\AchYuT\Desktop\epicycles\src\arrow.h(145,19): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\AchYuT\Desktop\epicycles\src\arrow.h(201,19): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\AchYuT\Desktop\epicycles\src\renderer.h(120,48): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+C:\Users\AchYuT\Desktop\epicycles\src\epicycles.cpp(125,42): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\AchYuT\Desktop\epicycles\src\epicycles.cpp(125,31): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\AchYuT\Desktop\epicycles\src\epicycles.cpp(125,27): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\AchYuT\Desktop\epicycles\src\epicycles.cpp(125,24): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\AchYuT\Desktop\epicycles\src\epicycles.cpp(137,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\AchYuT\Desktop\epicycles\src\epicycles.cpp(153,22): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\AchYuT\Desktop\epicycles\src\epicycles.cpp(192,11): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\AchYuT\Desktop\epicycles\src\epicycles.cpp(199,41): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\AchYuT\Desktop\epicycles\src\epicycles.cpp(199,35): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\AchYuT\Desktop\epicycles\src\epicycles.cpp(200,38): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\AchYuT\Desktop\epicycles\src\epicycles.cpp(200,22): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+glew32s.lib(glew.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'glew32s.lib(glew.obj)' or at 'C:\Users\AchYuT\Desktop\epicycles\build\Debug\vc120.pdb'; linking object as if no debug info
+LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
+LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
+  epicycles.vcxproj -> C:\Users\AchYuT\Desktop\epicycles\build\Debug\epicycles.exe
