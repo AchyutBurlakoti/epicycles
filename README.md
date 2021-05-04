@@ -18,9 +18,11 @@ You can learn more about it [here](https://efyang.dev/media/documents/efyang_KAM
 * Go inside main dir (.../epicycles)
 * Delete build folder
 * Open terminal
-* mkdir build
-* cd build
-* cmake -G "Visual Studio 16 2019" ..
+```
+mkdir build
+cd build
+cmake -G "Visual Studio 16 2019" ..
+```
 * Go inside build folder
 * Run vs soln (epicycles.sln)
 * Build the project in vs (Build ALL_BUILD)
