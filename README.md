@@ -14,4 +14,14 @@ You can learn more about it [here](https://efyang.dev/media/documents/efyang_KAM
 * Optimization to render more without lagging.
 * Add function to extract data from image directly to eliminate hard coding of image data.
 
-####                                   ********* Compile Process will be updated soon *********
+## Building Process
+* Go inside main dir (.../epicycles)
+* Delete build folder
+* Open terminal
+* mkdir build
+* cd build
+* cmake -G "Visual Studio 16 2019" ..
+* Go inside build folder
+* Run vs soln (epicycles.sln)
+* Build the project in vs (Build ALL_BUILD)
+* Run ..epicycles/build/DEBUG/epicycles.exe to see output
