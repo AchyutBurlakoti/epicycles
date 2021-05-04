@@ -19,7 +19,6 @@
 void                 key_callback(GLFWwindow *window, int key, int scancode, int action, int mode);
 void                 epicycles(double x, double y, double rotation, std::vector<Complex> fourier);
 void                 draw();
-void                 quick3Sort(int l, int r);
 std::vector<Complex> DFT(std::vector<Complex> c);
 
 const unsigned int   WIDTH = 1366, HEIGHT = 768;
