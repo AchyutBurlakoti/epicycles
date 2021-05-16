@@ -167,7 +167,7 @@ void linephase(float x1, float y1, float radius, float phi, unsigned int shader_
     glm::mat4 mvp = trans * projection;
 
     // Get their uniform location
-    GLint modelLoc = glGetUniformLocation(shaderProgram, "MVP");
+    GLint modelLoc = glGetUniformLocation(shader_program, "MVP");
     glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(mvp));
 
     // Draw the triangle
