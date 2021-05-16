@@ -21,7 +21,6 @@
 void                 key_callback(GLFWwindow *window, int key, int scancode, int action, int mode);
 void                 epicycles(double x, double y, double rotation, std::vector<Complex> fourier);
 void                 draw();
-void                 quick3Sort(int l, int r);
 std::vector<Complex> DFT(std::vector<Complex> c);
 
 const unsigned int   WIDTH = 1366, HEIGHT = 768;
@@ -175,75 +174,3 @@ std::vector<Complex> DFT(std::vector<Complex> x)
      }
      return _X;
  }
-
-void swap3(Complex *a, Complex *b)
-{
-    Complex temp = *a;
-    *a = *b;
-    *b = temp;
-}
-
-bool less3(float a, float b)
-{
-    return a > b;
-}
-
-std::pair<int, int> partition3(int l, int r)
-{
-    int i = l - 1;
-    int j = r;
-    int v = ft_datas[r].amp;
-    int p = l - 1;
-    int q = r;
-    int k;
-
-    for(;;)
-    {
-        while (less3(ft_datas[++i].amp, v));
-        while (less3(v, ft_datas[--j].amp))
-        {
-            if (j == l) break;
-        }
-
-        if (i >= j) break;
-
-        swap3(&ft_datas[i], &ft_datas[j]);
-
-        if (ft_datas[i].amp == v)
-        {
-            p++;
-            swap3(&ft_datas[p], &ft_datas[i]);
-        }
-
-        if (v == ft_datas[j].amp)
-        {
-            q--;
-            swap3(&ft_datas[q], &ft_datas[j]);
-        }
-    }
-
-    swap3(&ft_datas[i], &ft_datas[r]);
-
-    j = i - 1;
-    i = i + 1;
-    for (k = l; k < p; k++, j--)
-    {
-        swap3(&ft_datas[k], &ft_datas[j]);
-    }
-    for (k = r - 1; k > q; k--, i++)
-    {
-        swap3(&ft_datas[k], &ft_datas[i]);
-    }
-    return std::pair<int, int>(i, j);
-}
-
-void quick3Sort(int l, int r)
-{
-    if (l < r)
-    {
-        std::pair<int, int> i;
-        i = partition3(l, r);
-        quick3Sort(l, i.second);
-        quick3Sort(i.first, r);
-    }
-}
