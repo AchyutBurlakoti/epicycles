@@ -30,12 +30,13 @@ const char* vertexShaderSource = "#version 330 core\n"
 
 const char* fragmentShaderSource = "#version 330 core\n"
     "out vec4 color;\n"
+    "uniform vec3 u_color;\n"
     "void main()\n"
     "{\n"
-    "color = vec4(1.0f, 1.0f, 1.0f, 1.0f);\n"
+    "color = vec4(u_color.xyz, 1.0f);\n"
     "}\n\0";
 
-void compileandlinkShader()
+unsigned int compileandlinkShader()
 {
     // Build and compile our shader program
     // Vertex shader
@@ -83,6 +84,8 @@ void compileandlinkShader()
 
     glDeleteShader(vertexShader);
     glDeleteShader(fragmentShader);
+
+    return shaderProgram;
 }
 
 void setline(float x1, float y1, float x2, float y2)
@@ -134,63 +137,9 @@ void Pixelstorke(int stroke)
     glPointSize(stroke);
 }
 
-void line(float x1, float y1, float x2, float y2, float theta)
-{
-    // Clear the colorbuffer
-
-    compileandlinkShader();
-    setline(x1, y1, x2, y2);
-    float L1 = sqrt( (x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1) );
-    float L2 = 10.0f;
-    theta = theta * (3.14/180);
-    // triangle's coordinates
-    float x3 = x2 + (L2/L1) * ((x1 - x2) * cos(theta) + (y1 - y2) * sin(theta));
-    float y3 = y2 + (L2/L1) * ((y1 - y2) * cos(theta) - (x1 - x2) * sin(theta));
-    float x4 = x2 + (L2/L1) * ((x1 - x2) * cos(theta) - (y1 - y2) * sin(theta));
-    float y4 = y2 + (L2/L1) * ((y1 - y2) * cos(theta) + (x1 - x2) * sin(theta));
-    std::vector<float> t = {x4, y4, x2, y2, x3, y3};
-
-    glUseProgram(shaderProgram);
-    glBindVertexArray(VAO);
-
-    glm::mat4 projection;
-    projection = glm::ortho(0.0f, GLfloat(height), GLfloat(width), 0.0f, 0.0f, 1000.0f);
-
-    // Get their uniform location
-    GLint modelLoc = glGetUniformLocation(shaderProgram, "MVP");
-    glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(projection));
-
-    // Draw the triangle
-    glDrawArrays(GL_POINTS, 0, 4);
-    glBindVertexArray(0);
-
-    glDeleteVertexArrays(1, &VAO);
-    glDeleteBuffers(1, &VBO);
-
-    //------------------------//
-    compileandlinkShader();
-    settriangle(t);
-    glUseProgram(shaderProgram);
-    glBindVertexArray(VAO);
-
-    projection = glm::ortho(0.0f, GLfloat(height), GLfloat(width), 0.0f, 0.0f, 1000.0f);
-
-    // Get their uniform location
-    modelLoc = glGetUniformLocation(shaderProgram, "MVP");
-    glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(projection));
-
-    // Draw the triangle
-    glDrawArrays(GL_TRIANGLES, 0, 3);
-    glBindVertexArray(0);
-
-    glDeleteVertexArrays(1, &VAO);
-    glDeleteBuffers(1, &VBO);
-}
-
-void linephase(float x1, float y1, float radius, float phi, float theta = 30.0f)
+void linephase(float x1, float y1, float radius, float phi, unsigned int shader_program, float theta = 30.0f)
 {
     //--------------         To Draw Arrow's Line         ----------//
-    compileandlinkShader();
 
     x2 = radius * cos(phi) + x1;
     y2 = radius * sin(phi) + y1;
@@ -207,7 +156,8 @@ void linephase(float x1, float y1, float radius, float phi, float theta = 30.0f)
     float y4 = y2 + (L2/L1) * ((y1 - y2) * cos(theta) + (x1 - x2) * sin(theta));
     std::vector<float> t = {x4, y4, x2, y2, x3, y3};
 
-    glUseProgram(shaderProgram);
+    glUseProgram(shader_program);
+    glUniform3f(glGetUniformLocation(shader_program, "u_color"), 1.0f, 1.0f, 1.0f);
     glBindVertexArray(VAO);
 
     glm::mat4 projection;
@@ -228,9 +178,9 @@ void linephase(float x1, float y1, float radius, float phi, float theta = 30.0f)
     glDeleteBuffers(1, &VBO);
 
     //--------------         To Draw Arrow Head         ----------//
-    compileandlinkShader();
     settriangle(t);
-    glUseProgram(shaderProgram);
+    glUseProgram(shader_program);
+    glUniform3f(glGetUniformLocation(shader_program, "u_color"), 1.0f, 1.0f, 1.0f);
     glBindVertexArray(VAO);
 
     projection = glm::ortho(0.0f, GLfloat(height), GLfloat(width), 0.0f, 0.0f, 1000.0f);
@@ -239,7 +189,7 @@ void linephase(float x1, float y1, float radius, float phi, float theta = 30.0f)
     mvp = trans_one * projection;
 
     // Get their uniform location
-    modelLoc = glGetUniformLocation(shaderProgram, "MVP");
+    modelLoc = glGetUniformLocation(shader_program, "MVP");
     glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(mvp));
 
     // Draw the triangle

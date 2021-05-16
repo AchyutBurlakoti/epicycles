@@ -15,6 +15,8 @@
 #include "renderer.h"
 #include "data.h"
 
+#define TWO_PI 6.28318530717958647693
+
 // Function declaration
 void                 key_callback(GLFWwindow *window, int key, int scancode, int action, int mode);
 void                 epicycles(double x, double y, double rotation, std::vector<Complex> fourier);
@@ -26,6 +28,7 @@ const unsigned int   WIDTH = 1366, HEIGHT = 768;
 float                _time = 0;
 std::vector<Complex> ft_datas;
 std::vector<float>   pixel;
+unsigned int         shaderprogram;
 
 // The MAIN function, from here we start the application and run the game loop
 int main()
@@ -57,7 +60,7 @@ int main()
 
     /* getdata() will return the vector data. It contains datas of image. [TheCodingTrainLogo] */
     std::vector<Complex> datas_from_image = getdata();
-    const int            skip             = 20;
+    const int            skip             = 8;
     std::vector<Complex> curated_datas;
 
     /* To get few datas to approximate the image. As more data will have more circles to draw which takes longer
@@ -76,7 +79,7 @@ int main()
     {
         return a.amp > b.amp;
     });
-
+    shaderprogram = hot::compileandlinkShader();
     // Render loop
     while (!glfwWindowShouldClose(window))
     {
@@ -122,22 +125,22 @@ void epicycles(double x, double y, double rotation, std::vector<Complex> fourier
         double _phase = fourier[i].phase;
         double _phi = _freq * _time + _phase + rotation;
 
-        hot::linephase(x, y,2 * _radius, _phi);
+        hot::linephase(x, y,2 * _radius, _phi, shaderprogram);
         x = hot::getArrowCoordX();
         y = hot::getArrowCoordY();
     }
     pixel.push_back(hot::getArrowCoordX());
     pixel.push_back(hot::getArrowCoordY());
-    render(make(pixel));
+    render(make(pixel), shaderprogram);
 }
 
 void draw()
 {
     epicycles(WIDTH / 2, HEIGHT / 2, 0, ft_datas);
-    float dt = ( 2 * 3.14 ) / ft_datas.size();
+    float dt = ( TWO_PI ) / ft_datas.size();
     _time += dt;
 
-    if (_time > (2 * 3.14)) { _time = 0; pixel.clear(); }
+    if (_time > (TWO_PI)) { _time = 0; pixel.clear(); }
 }
 
 // Is called whenever a key is pressed/released via GLFW
@@ -156,7 +159,7 @@ std::vector<Complex> DFT(std::vector<Complex> x)
          Complex sum(0, 0);
          for (int n = 0; n < N; n++)
          {
-             double phi = (2  * 3.14 * k * n) / N;
+             double phi = (TWO_PI * k * n) / N;
              Complex c(cos(phi), -sin(phi));
              sum.add(x[n].mult(c));
          }
