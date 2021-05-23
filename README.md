@@ -11,7 +11,7 @@ You can learn more about it [here](https://efyang.dev/media/documents/efyang_KAM
 ![alt tag](https://github.com/AchyutBurlakoti/epicycles/blob/master/epicycles.png)
 
 ## Things to be done
-* Optimization to render more without lagging.
+* ~Optimization to render more without lagging.~
 * Add function to extract data from image directly to eliminate hard coding of image data.
 
 ## Building Process
