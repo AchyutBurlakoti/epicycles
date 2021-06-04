@@ -15,6 +15,7 @@ You can learn more about it [here](https://efyang.dev/media/documents/efyang_KAM
 * Add function to extract data from image directly to eliminate hard coding of image data.
 
 ## Building Process
+# Cmake
 * Go inside main dir (.../epicycles)
 * Delete build folder
 * Open terminal
@@ -27,3 +28,8 @@ cmake -G "Visual Studio 16 2019" ..
 * Run vs soln (epicycles.sln)
 * Build the project in vs (Build ALL_BUILD)
 * Run ..epicycles/build/DEBUG/epicycles.exe to see output
+
+
+# Makefile
+* open cmd inside epicycles dir
+* run make
