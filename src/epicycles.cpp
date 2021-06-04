@@ -1,5 +1,3 @@
-#include <iostream>
-
 // GLEW
 #define GLEW_STATIC
 #include <GLEW/glew.h>
@@ -7,6 +5,7 @@
 // GLFW
 #include <GLFW/glfw3.h>
 
+#include <iostream>
 #include <math.h>
 #include <vector>
 #include <algorithm>
@@ -40,6 +39,7 @@ int main()
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
+    glfwWindowHint(GLFW_SAMPLES, 4);
 
     // Create a GLFWwindow object that we can use for GLFW's functions
     GLFWwindow *window = glfwCreateWindow(WIDTH, HEIGHT, "Epicycles", nullptr, nullptr);
@@ -56,6 +56,10 @@ int main()
 
     // Define the viewport dimensions
     glViewport(0, 0, WIDTH, HEIGHT);
+
+    // Setup OpenGL options
+    glEnable(GL_MULTISAMPLE); // Enabled by default on some drivers, but not all so always enable to make sure
+    //glEnable(GL_DEPTH_TEST);
 
     /* getdata() will return the vector data. It contains datas of image. [TheCodingTrainLogo] */
     std::vector<Complex> datas_from_image = getdata();
