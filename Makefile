@@ -1,4 +1,4 @@
-CXX=cc
+CXX=g++
 
 INCS=-I./include
 
